@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>メルカリ新着アラート</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- ヘッダー -->
+  <div class="header">
+    <h1>🛍️ メルカリ新着アラート</h1>
+    <span class="plan-badge" id="plan-badge">無料版</span>
+  </div>
+
+  <!-- タブバー -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="keywords">キーワード</button>
+    <button class="tab-btn" data-tab="settings">設定</button>
+    <button class="tab-btn" data-tab="history">履歴</button>
+  </div>
+
+  <!-- キーワードタブ -->
+  <div id="tab-keywords" class="tab-content active">
+    <div class="input-row">
+      <input type="text" id="keyword-input" placeholder="キーワードを入力" maxlength="50">
+      <button id="add-btn">追加</button>
+    </div>
+    <p id="error-msg" class="error hidden"></p>
+    <div class="list-header">
+      登録キーワード <span id="count">0</span><span id="max-label"> / 3</span>
+    </div>
+    <ul id="keyword-list"></ul>
+  </div>
+
+  <!-- 設定タブ -->
+  <div id="tab-settings" class="tab-content">
+
+    <!-- ライセンス認証 -->
+    <div class="setting-group">
+      <div class="setting-label">ライセンス認証</div>
+      <div class="license-input-row" id="license-input-area">
+        <input type="text" id="license-input"
+               placeholder="ライセンスキーを入力" maxlength="100" spellcheck="false">
+        <button id="license-btn">認証する</button>
+      </div>
+      <p id="license-status" class="license-status"></p>
+    </div>
+
+    <hr class="setting-divider">
+
+    <!-- 通知ON/OFF（全プラン共通） -->
+    <div class="setting-group">
+      <div class="setting-label">デスクトップ通知</div>
+      <div class="toggle-row">
+        <label class="toggle-switch">
+          <input type="checkbox" id="notif-toggle" checked>
+          <span class="toggle-track"></span>
+        </label>
+        <span id="notif-toggle-label" class="toggle-text">ON</span>
+      </div>
+    </div>
+
+    <hr class="setting-divider">
+
+    <div class="setting-group">
+      <div class="setting-label">
+        除外キーワード<span class="pro-badge">PRO</span>
+      </div>
+      <input type="text" id="exclude-keywords"
+             placeholder="中古,used,破れ（カンマ区切り）" maxlength="200">
+      <p class="pro-hint" id="hint-exclude">有料版で使えます</p>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-label">
+        価格フィルター<span class="pro-badge">PRO</span>
+      </div>
+      <div class="price-row">
+        <input type="number" id="price-min" placeholder="下限なし" min="0">
+        <span class="price-sep">〜</span>
+        <input type="number" id="price-max" placeholder="上限なし" min="0">
+        <span class="price-unit">円</span>
+      </div>
+      <p class="pro-hint" id="hint-price">有料版で使えます</p>
+    </div>
+  </div>
+
+  <!-- 履歴タブ -->
+  <div id="tab-history" class="tab-content">
+    <div id="history-locked" class="history-locked hidden">
+      <p>🔒 通知履歴は有料版で使えます</p>
+    </div>
+    <ul id="history-list"></ul>
+  </div>
+
+  <!-- フッター -->
+  <div class="footer">
+    <p id="status-text" class="status">60秒ごとに自動チェック中</p>
+    <span id="notif-off-badge" class="notif-off-badge hidden">通知OFF中</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
